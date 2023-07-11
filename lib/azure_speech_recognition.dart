@@ -1,3 +1,5 @@
+library azure_speech_recognition;
+
 import 'dart:async';
 
 import 'package:flutter/services.dart';
