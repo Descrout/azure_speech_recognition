@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/services.dart';
 
@@ -18,17 +17,17 @@ class AzureSpeechRecognition {
     _channel.setMethodCallHandler(_platformCallHandler);
   }
 
-  static String _subKey;
-  static String _region;
   static String _lang = "en-EN";
-  static String _languageUnderstandingSubscriptionKey;
-  static String _languageUnderstandingServiceRegion;
-  static String _languageUnderstandingAppId;
+  static String? _subKey;
+  static String? _region;
+  static String? _languageUnderstandingSubscriptionKey;
+  static String? _languageUnderstandingServiceRegion;
+  static String? _languageUnderstandingAppId;
 
   /// default intitializer for almost every type except for the intent recognizer.
   /// Default language -> English
   AzureSpeechRecognition.initialize(String subKey, String region,
-      {String lang}) {
+      {String? lang}) {
     _subKey = subKey;
     _region = region;
     if (lang != null) _lang = lang;
@@ -38,19 +37,19 @@ class AzureSpeechRecognition {
   /// Default language -> English
   AzureSpeechRecognition.initializeLanguageUnderstading(
       String subKey, String region, String appId,
-      {lang}) {
+      {String? lang}) {
     _languageUnderstandingSubscriptionKey = subKey;
     _languageUnderstandingServiceRegion = region;
     _languageUnderstandingAppId = appId;
     if (lang != null) _lang = lang;
   }
 
-  StringResultHandler exceptionHandler;
-  StringResultHandler recognitionResultHandler;
-  StringResultHandler finalTranscriptionHandler;
-  VoidCallback recognitionStartedHandler;
-  VoidCallback startRecognitionHandler;
-  VoidCallback recognitionStoppedHandler;
+  late StringResultHandler exceptionHandler;
+  late StringResultHandler recognitionResultHandler;
+  late StringResultHandler finalTranscriptionHandler;
+  late VoidCallback recognitionStartedHandler;
+  late VoidCallback startRecognitionHandler;
+  late VoidCallback recognitionStoppedHandler;
 
   Future _platformCallHandler(MethodCall call) async {
     switch (call.method) {
